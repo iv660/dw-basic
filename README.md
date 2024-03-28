@@ -14,13 +14,16 @@ Ok
 ```
 
 ### Available Commands
-#### exit
-Ends the BASIC interpreter session.
-
 #### run
 Executes the program currently available in BASIC interpreter memory.
 
-### Entering a Program
+### list
+Prints the listing of program currently available in BASIC interpreter memory.
+
+#### exit
+Ends the BASIC interpreter session.
+
+### Editing a Program
 In command mode, enter the program line by line starting with a line number. To finish a line and store it in memory, hit `Enter`.
 
 

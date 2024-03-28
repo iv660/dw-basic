@@ -11,10 +11,9 @@ class Code
 {
     public: 
         Code* addLine(int number, string rawCommand);
+        map<int, string> getLines();
     private:
-        // Line *lines;
         map<int, string> lines;
-        // int linesCount = 0;
 };
 
 #endif

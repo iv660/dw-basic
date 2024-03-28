@@ -33,7 +33,12 @@ using namespace std;
 
 Code* Code::addLine(int number, string rawCommand)
 {
-    
+    lines[number] = rawCommand;
 
     return this;
+}
+
+map<int, string> Code::getLines()
+{
+    return lines;
 }

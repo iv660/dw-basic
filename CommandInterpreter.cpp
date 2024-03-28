@@ -7,6 +7,7 @@
 #include "RunCommand.cpp"
 #include "InsertCodeCommand.cpp"
 #include "Code.cpp"
+#include "ListCommand.cpp"
 
 using namespace std;
 
@@ -48,6 +49,9 @@ Command* CommandInterpreter::createCommandByRequest(string request)
 {
     if (InsertCodeCommand::canHandle(request)) {
         return new InsertCodeCommand(request, code);
+    }
+    if (ListCommand::canHandle(request)) {
+        return new ListCommand(code);
     }
     if (RunCommand::canHandle(request)) {
         return new RunCommand;

@@ -5,10 +5,12 @@
 
 using namespace std;
 
-struct Line 
+class Line 
 {
-    int number;
-    string rawCommand;
+    public: 
+        int number;
+        string rawCommand;
+        string toString();
 };
 
 #endif

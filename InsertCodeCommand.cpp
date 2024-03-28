@@ -1,7 +1,7 @@
 #include <string>
 #include "InsertCodeCommand.h"
 #include "Output.h"
-#include "Line.h"
+#include "Line.cpp"
 
 using namespace std;
 
@@ -29,6 +29,8 @@ void InsertCodeCommand::run()
 {
     Line line = parse(request);
     addLine(line);
+    Output out;
+    out.writeString(line.toString());
 }
 
 bool InsertCodeCommand::isDigit(char character)
