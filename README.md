@@ -14,6 +14,10 @@ Ok
 ```
 
 ### Available Commands
+In command mode, you can enter the following commands.
+
+> NOTE. All commands are case-insensitive.
+
 #### run
 Executes the program currently available in BASIC interpreter memory.
 
