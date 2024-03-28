@@ -2,12 +2,18 @@
 #include <iostream>
 #include "CommandInterpreter.h"
 #include "Command.h"
-#include "ExitCommand.h"
-#include "InvalidCommand.h"
-#include "RunCommand.h"
-#include "InsertCodeCommand.h"
+#include "ExitCommand.cpp"
+#include "InvalidCommand.cpp"
+#include "RunCommand.cpp"
+#include "InsertCodeCommand.cpp"
+#include "Code.cpp"
 
 using namespace std;
+
+CommandInterpreter::CommandInterpreter() 
+{
+    code = new Code;
+}
 
 void CommandInterpreter::run()
 {
@@ -37,17 +43,19 @@ string CommandInterpreter::getLine()
     return line;
 }
 
+
 Command* CommandInterpreter::createCommandByRequest(string request)
 {
     if (InsertCodeCommand::canHandle(request)) {
-        return new InsertCodeCommand();
+        return new InsertCodeCommand(request, code);
     }
     if (RunCommand::canHandle(request)) {
-        return new RunCommand();
+        return new RunCommand;
     }
     if (ExitCommand::canHandle(request)) {
-        return new ExitCommand();
-    } else {
-        return new InvalidCommand();
+        return new ExitCommand;
     }
+
+    return new InvalidCommand;
 }
+

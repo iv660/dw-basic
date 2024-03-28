@@ -9,7 +9,7 @@ class Output
 {
     public:
         void writeLine(const char* text);
-        void writeString(const string text);
+        void writeString(string text);
 };
 
 #endif
