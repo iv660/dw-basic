@@ -1,5 +1,6 @@
 #include <string>
 #include "ExitCommand.h"
+#include "CommandMatcher.h"
 
 using namespace std;
 
@@ -15,7 +16,9 @@ bool ExitCommand::terminationRequested()
 
 bool ExitCommand::canHandle(string command)
 {
-    if ("exit" == command) {
+    CommandMatcher matcher;
+
+    if (matcher.commandIs(command, "exit")) {
         return true;
     }
     

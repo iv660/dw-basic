@@ -1,6 +1,7 @@
 #include <string>
 #include "ListCommand.h"
 #include "Output.h"
+#include "CommandMatcher.cpp"
 
 
 ListCommand::ListCommand(Code * code)
@@ -24,7 +25,9 @@ bool ListCommand::terminationRequested()
 
 bool ListCommand::canHandle(string request)
 {
-    if ("list" == request) {
+    CommandMatcher matcher;
+    
+    if (matcher.commandIs(request, "list")) {
         return true;
     }
 
