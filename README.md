@@ -17,7 +17,7 @@ Ok
 #### run
 Executes the program currently available in BASIC interpreter memory.
 
-### list
+#### list
 Prints the listing of program currently available in BASIC interpreter memory.
 
 #### exit
