@@ -1,10 +1,13 @@
 #include <string>
 #include "RunCommand.h"
 #include "Instruction.h"
+#include "CommandMatcher.h"
 
 bool RunCommand::canHandle(string request)
 {
-    if ("run" == request) {
+    CommandMatcher matcher;
+    
+    if (matcher.commandIs(request, "run")) {
         return true;
     }
     
