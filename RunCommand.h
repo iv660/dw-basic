@@ -3,6 +3,8 @@
 
 #include <string>
 #include "Command.h"
+#include "Code.h"
+#include "Instruction.h"
 
 using namespace std;
 
@@ -12,6 +14,9 @@ class RunCommand : public Command
         void run();
         bool terminationRequested();
         static bool canHandle(string request);
+    private:
+        Code *code;
+        Instruction* createInstructionFrom(string instructionCode);
 };
 
 

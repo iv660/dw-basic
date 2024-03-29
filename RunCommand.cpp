@@ -1,6 +1,6 @@
 #include <string>
 #include "RunCommand.h"
-#include "Output.h"
+#include "Instruction.h"
 
 bool RunCommand::canHandle(string request)
 {
@@ -11,6 +11,11 @@ bool RunCommand::canHandle(string request)
     return false;
 }
 
+Instruction * RunCommand::createInstructionFrom(string instructionCode)
+{
+    return nullptr;
+}
+
 bool RunCommand::terminationRequested()
 {
     return false;
@@ -18,6 +23,13 @@ bool RunCommand::terminationRequested()
 
 void RunCommand::run()
 {
-    Output out;
-    out.writeLine("Running...");
+    std::map<int, std::string>::iterator codeIterator = code->getLines().begin();
+    std::map<int, std::string>::iterator end = code->getLines().end();
+
+    while (codeIterator != end) {
+        string instructionCode = codeIterator->second;
+        Instruction *instruction = createInstructionFrom(instructionCode);
+        instruction->run();
+        codeIterator++;
+    }
 }
