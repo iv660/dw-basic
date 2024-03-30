@@ -2,6 +2,8 @@
 #include "RunCommand.h"
 #include "Instruction.h"
 #include "CommandMatcher.h"
+#include "InvalidInstruction.cpp"
+#include "Output.h"
 
 bool RunCommand::canHandle(string request)
 {
@@ -16,7 +18,7 @@ bool RunCommand::canHandle(string request)
 
 Instruction * RunCommand::createInstructionFrom(string instructionCode)
 {
-    return nullptr;
+    return new InvalidInstruction();
 }
 
 bool RunCommand::terminationRequested()
@@ -24,15 +26,37 @@ bool RunCommand::terminationRequested()
     return false;
 }
 
+RunCommand::RunCommand(Code * code)
+{
+    this->code = code;
+}
+
 void RunCommand::run()
 {
-    std::map<int, std::string>::iterator codeIterator = code->getLines().begin();
-    std::map<int, std::string>::iterator end = code->getLines().end();
+    std::map<int, std::string> lines = code->getLines();
+    std::map<int, std::string>::iterator codeIterator = lines.begin();
+    std::map<int, std::string>::iterator end = lines.end();
 
-    while (codeIterator != end) {
+    bool isTerminated = false;
+    int haltInLine = 0;
+    while (codeIterator != end && !isTerminated) {
         string instructionCode = codeIterator->second;
         Instruction *instruction = createInstructionFrom(instructionCode);
+        
         instruction->run();
-        codeIterator++;
+        
+        isTerminated = instruction->terminationRequested();
+        delete instruction;
+        
+        if (isTerminated) {
+            break;
+        }
+        
+        codeIterator++; 
+    }
+
+    if (isTerminated) {
+        Output out;
+        out.writeString("Halt in line " + std::to_string(codeIterator->first));
     }
 }

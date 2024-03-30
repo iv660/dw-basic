@@ -54,7 +54,7 @@ Command* CommandInterpreter::createCommandByRequest(string request)
         return new ListCommand(code);
     }
     if (RunCommand::canHandle(request)) {
-        return new RunCommand;
+        return new RunCommand(code);
     }
     if (ExitCommand::canHandle(request)) {
         return new ExitCommand;

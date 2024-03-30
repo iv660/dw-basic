@@ -5,18 +5,20 @@
 #include "Command.h"
 #include "Code.h"
 #include "Instruction.h"
+#include "Line.h"
 
 using namespace std;
 
 class RunCommand : public Command
 {
     public:
+        RunCommand(Code *code);
         void run();
         bool terminationRequested();
         static bool canHandle(string request);
     private:
         Code *code;
-        Instruction* createInstructionFrom(string instructionCode);
+        Instruction * createInstructionFrom(string instructionCode);
 };
 
 
