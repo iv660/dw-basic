@@ -2,6 +2,7 @@
 #include "RunCommand.h"
 #include "Instruction.h"
 #include "CommandMatcher.h"
+#include "RemInstruction.cpp"
 #include "InvalidInstruction.cpp"
 #include "Output.h"
 
@@ -18,6 +19,9 @@ bool RunCommand::canHandle(string request)
 
 Instruction * RunCommand::createInstructionFrom(string instructionCode)
 {
+    if (RemInstruction::canHandle(instructionCode)) {
+        return new RemInstruction;
+    }
     return new InvalidInstruction();
 }
 

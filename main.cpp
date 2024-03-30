@@ -2,6 +2,7 @@
 
 #include "Output.cpp"
 #include "CommandInterpreter.cpp"
+#include "InstructionMatcher.cpp"
 
 int main()
 {
