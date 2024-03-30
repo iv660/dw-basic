@@ -53,14 +53,11 @@ void RunCommand::run()
         delete instruction;
         
         if (isTerminated) {
+            Output out;
+            out.writeString("Halt in line " + std::to_string(codeIterator->first));
             break;
         }
         
         codeIterator++; 
-    }
-
-    if (isTerminated) {
-        Output out;
-        out.writeString("Halt in line " + std::to_string(codeIterator->first));
     }
 }
