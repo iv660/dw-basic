@@ -2,6 +2,8 @@
 #include "InsertCodeCommand.h"
 #include "Output.h"
 #include "Line.cpp"
+#include "Parser.h"
+#include "ParseHelper.h"
 
 using namespace std;
 
@@ -13,7 +15,7 @@ InsertCodeCommand::InsertCodeCommand(string request, Code *code)
 
 bool InsertCodeCommand::canHandle(string request)
 {
-    if (InsertCodeCommand::isDigit(request[0])) {
+    if (ParseHelper::isDigit(request[0])) {
         return true;
     }
     
@@ -48,40 +50,17 @@ bool InsertCodeCommand::isDigit(char character)
 
 Line InsertCodeCommand::parse(string request)
 {
-    string::iterator requestIterator = request.begin();
-    
-    int number = pickLineNumberFrom(requestIterator, request.end());
-    skipWhitespaceIn(requestIterator, request.end());
-    string rawCommand = pickRawCommandFrom(requestIterator, request.end());// string(requestIterator, request.end());
+    Parser parser(request);
+
+    int number = parser.pickLineNumber();
+    parser.skipWhitespace();
+    string rawCommand = parser.pickRest();
 
     Line line;
     line.number = number;
     line.rawCommand = rawCommand;
 
     return line;
-}
-
-int InsertCodeCommand::pickLineNumberFrom(string::iterator &requestIterator, string::iterator end)
-{
-    string number;
-    while (isDigit(*requestIterator) && requestIterator <= end) {
-        number.append(1, *requestIterator);
-        requestIterator++;
-    }
-    
-    return std::stoi(number);
-}
-
-void InsertCodeCommand::skipWhitespaceIn(string::iterator &requestIterator, string::iterator end)
-{
-    while (isspace(*requestIterator) && requestIterator <= end) {
-        requestIterator++;
-    }
-}
-
-string InsertCodeCommand::pickRawCommandFrom(string::iterator &requestIterator, string::iterator end)
-{
-    return string(requestIterator, end);
 }
 
 void InsertCodeCommand::addLine(Line line)

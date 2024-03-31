@@ -19,7 +19,7 @@ class InsertCodeCommand : public Command
         static bool isDigit(char character);
         Line parse(string request);
         string request;
-        Code *code;
+        Code * code;
         void addLine(Line line);
         int pickLineNumberFrom(string::iterator &requestIterator, string::iterator end);
         void skipWhitespaceIn(string::iterator &requestIterator, string::iterator end);
