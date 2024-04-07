@@ -12,6 +12,7 @@ class Code
     public: 
         Code* addLine(long number, string rawCommand);
         map<long, string> getLines();
+        void clear();
     private:
         map<long, string> lines;
 };

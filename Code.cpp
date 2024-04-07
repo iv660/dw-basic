@@ -17,3 +17,8 @@ map<long, string> Code::getLines()
 {
     return lines;
 }
+
+void Code::clear()
+{
+    lines.clear();
+}

@@ -24,6 +24,9 @@ Executes the program currently available in BASIC interpreter memory.
 #### LIST
 Prints the listing of program currently available in BASIC interpreter memory.
 
+#### NEW
+Deletes the entire program from BASIC interpreter memory.
+
 #### EXIT
 Ends the BASIC interpreter session.
 

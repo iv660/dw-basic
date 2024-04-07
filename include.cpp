@@ -3,3 +3,4 @@
 #include "PrintInstruction.cpp"
 #include "StringLiteralExpression.cpp"
 #include "IntegerLiteralExpression.cpp"
+#include "NewCommand.cpp"

@@ -8,6 +8,7 @@
 #include "InsertCodeCommand.cpp"
 #include "Code.cpp"
 #include "ListCommand.cpp"
+#include "NewCommand.h"
 
 using namespace std;
 
@@ -45,7 +46,7 @@ string CommandInterpreter::getLine()
 }
 
 
-Command* CommandInterpreter::createCommandByRequest(string request)
+Command * CommandInterpreter::createCommandByRequest(string request)
 {
     if (InsertCodeCommand::canHandle(request)) {
         return new InsertCodeCommand(request, code);
@@ -58,6 +59,9 @@ Command* CommandInterpreter::createCommandByRequest(string request)
     }
     if (ExitCommand::canHandle(request)) {
         return new ExitCommand;
+    }
+    if (NewCommand::canHandle(request)) {
+        return new NewCommand(code);
     }
 
     return new InvalidCommand;

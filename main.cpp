@@ -1,4 +1,4 @@
-#define DW_BASIC_VERSION "0.0.1-pre-alpha"
+#define DW_BASIC_VERSION "0.0.1.alpha"
 
 #include "include.cpp"
 #include "Output.cpp"
