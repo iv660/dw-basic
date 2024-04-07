@@ -39,13 +39,17 @@ void Parser::skipName(std::string name)
 Expression * Parser::pickExpression()
 {
     if ('"' == peek()) {
-        return pickStringExpression();
+        return pickStringLiteralExpression();
+    }
+
+    if (isDigit()) {
+        return pickIntegerLiteralExpression();
     }
 
     return {};
 }
 
-StringLiteralExpression * Parser::pickStringExpression()
+StringLiteralExpression * Parser::pickStringLiteralExpression()
 {
     std::string value = "";
 
@@ -60,6 +64,19 @@ StringLiteralExpression * Parser::pickStringExpression()
     }
 
     return new StringLiteralExpression(value);
+}
+
+IntegerLiteralExpression * Parser::pickIntegerLiteralExpression()
+{
+    std::string valueString = "";
+
+    while (isDigit()) {
+        valueString.push_back(consume());
+    }
+
+    long value = std::stol(valueString);
+
+    return new IntegerLiteralExpression(value);
 }
 
 char Parser::consume()
@@ -103,6 +120,19 @@ bool Parser::isEscapedQuote()
     }
 
     if (peek() == '"' && peek(2) == '"') {
+        return true;
+    }
+
+    return false;
+}
+
+bool Parser::isDigit()
+{
+    if (isLast()) {
+        return false;
+    }
+
+    if (ParseHelper::isDigit(peek())) {
         return true;
     }
 

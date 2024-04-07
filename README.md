@@ -35,7 +35,7 @@ In command mode, enter the program line by line starting with a line number. To 
 BASIC program consists of sequence of lines of code. Each line has the following structure:
 
 ```basic
-LINE_NUMBER INSTRUCTION [ARGUMENT[, ARGUMENTS]]
+<LINE_NUMBER> <INSTRUCTION> [<ARGUMENT>[, <ARGUMENTS>]]
 ```
 
 `LINE_NUMBER` is an integer representing the line position, and could also be used as a label for conditional and unconditional jumps.
@@ -57,6 +57,46 @@ Spaces between different parts of the line are optional.
 #### PRINT
 Outputs the expression value to console.
 
+##### Basic syntax:
+
+```basic
+<LINE_NUMBER> PRINT <EXPRESSION>
+```
+
+##### Examples:
+
 ```basic
 10 PRINT "Hello, World!"
+```
+
+```basic
+10 PRINT 42
+```
+
+### Expressions
+#### String Literals
+String literal is a sequence of characters enclosed in double quotes (`"`).
+
+```basic
+"My name is John"
+```
+
+To include the double quote character in string literal, it must be escaped with another double quote.
+
+```basic
+"The answer is ""Yes"""
+```
+
+#### Integer Literals
+Integer literal is a plain decimal number.
+
+```basic
+61
+```
+
+When used in string context, integer literals are implicitly converted to their string representation.
+
+```basic
+10 PRINT 61
+20 REM The same as 10 PRINT "61"
 ```
