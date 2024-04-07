@@ -3,7 +3,7 @@
 
 #include <string>
 #include "Expression.h"
-#include "StringExpression.h"
+#include "StringLiteralExpression.h"
 
 class Parser
 {
@@ -18,7 +18,7 @@ class Parser
         std::string code;
         std::string::iterator codeIterator;
         std::string::iterator end;
-        StringExpression * pickStringExpression();
+        StringLiteralExpression * pickStringExpression();
         char consume();
         char peek(long depth = 1);
         void skip();

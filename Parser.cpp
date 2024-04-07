@@ -45,7 +45,7 @@ Expression * Parser::pickExpression()
     return {};
 }
 
-StringExpression * Parser::pickStringExpression()
+StringLiteralExpression * Parser::pickStringExpression()
 {
     std::string value = "";
 
@@ -59,7 +59,7 @@ StringExpression * Parser::pickStringExpression()
         value.push_back(consume());
     }
 
-    return new StringExpression(value);
+    return new StringLiteralExpression(value);
 }
 
 char Parser::consume()

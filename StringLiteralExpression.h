@@ -3,10 +3,10 @@
 #include <string>
 #include "Expression.h"
 
-class StringExpression: public Expression
+class StringLiteralExpression: public Expression
 {
     public:
-        StringExpression(std::string value);
+        StringLiteralExpression(std::string value);
         std::string toString();
     private:
         std::string value;
