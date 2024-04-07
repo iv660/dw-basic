@@ -21,7 +21,7 @@ class InsertCodeCommand : public Command
         string request;
         Code * code;
         void addLine(Line line);
-        int pickLineNumberFrom(string::iterator &requestIterator, string::iterator end);
+        long pickLineNumberFrom(string::iterator &requestIterator, string::iterator end);
         void skipWhitespaceIn(string::iterator &requestIterator, string::iterator end);
         string pickRawCommandFrom(string::iterator &requestIterator, string::iterator end);
 };

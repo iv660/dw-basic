@@ -32,7 +32,6 @@ void InsertCodeCommand::run()
     Line line = parse(request);
     addLine(line);
     Output out;
-    out.writeString(line.toString());
 }
 
 bool InsertCodeCommand::isDigit(char character)
@@ -52,7 +51,7 @@ Line InsertCodeCommand::parse(string request)
 {
     Parser parser(request);
 
-    int number = parser.pickLineNumber();
+    long number = parser.pickLineNumber();
     parser.skipWhitespace();
     string rawCommand = parser.pickRest();
 

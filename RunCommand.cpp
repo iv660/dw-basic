@@ -5,6 +5,7 @@
 #include "RemInstruction.cpp"
 #include "InvalidInstruction.cpp"
 #include "Output.h"
+#include "PrintInstruction.h"
 
 bool RunCommand::canHandle(string request)
 {
@@ -22,6 +23,11 @@ Instruction * RunCommand::createInstructionFrom(string instructionCode)
     if (RemInstruction::canHandle(instructionCode)) {
         return new RemInstruction;
     }
+
+    if (PrintInstruction::canHandle(instructionCode)) {
+        return new PrintInstruction(instructionCode);
+    }
+
     return new InvalidInstruction();
 }
 
@@ -37,12 +43,12 @@ RunCommand::RunCommand(Code * code)
 
 void RunCommand::run()
 {
-    std::map<int, std::string> lines = code->getLines();
-    std::map<int, std::string>::iterator codeIterator = lines.begin();
-    std::map<int, std::string>::iterator end = lines.end();
+    std::map<long, std::string> lines = code->getLines();
+    std::map<long, std::string>::iterator codeIterator = lines.begin();
+    std::map<long, std::string>::iterator end = lines.end();
 
     bool isTerminated = false;
-    int haltInLine = 0;
+    long haltInLine = 0;
     while (codeIterator != end && !isTerminated) {
         string instructionCode = codeIterator->second;
         Instruction *instruction = createInstructionFrom(instructionCode);

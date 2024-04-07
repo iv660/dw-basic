@@ -12,7 +12,7 @@ ListCommand::ListCommand(Code * code)
 
 void ListCommand::run()
 {
-    map<int, string>::iterator linesIterator;
+    map<long, string>::iterator linesIterator;
     for (auto const& [number, rawCode] : this->code->getLines()) {
         out->writeString(std::to_string(number) + " " + rawCode);
     }

@@ -6,14 +6,14 @@
 
 using namespace std;
 
-Code* Code::addLine(int number, string rawCommand)
+Code* Code::addLine(long number, string rawCommand)
 {
     lines[number] = rawCommand;
 
     return this;
 }
 
-map<int, string> Code::getLines()
+map<long, string> Code::getLines()
 {
     return lines;
 }

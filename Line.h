@@ -8,7 +8,7 @@ using namespace std;
 class Line 
 {
     public: 
-        int number;
+        long number;
         string rawCommand;
         string toString();
 };

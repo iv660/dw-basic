@@ -10,10 +10,10 @@ using namespace std;
 class Code 
 {
     public: 
-        Code* addLine(int number, string rawCommand);
-        map<int, string> getLines();
+        Code* addLine(long number, string rawCommand);
+        map<long, string> getLines();
     private:
-        map<int, string> lines;
+        map<long, string> lines;
 };
 
 #endif

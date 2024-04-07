@@ -53,3 +53,10 @@ Spaces between different parts of the line are optional.
 ```basic
 10 REM Comment text
 ```
+
+#### PRINT
+Outputs the expression value to console.
+
+```basic
+10 PRINT "Hello, World!"
+```
