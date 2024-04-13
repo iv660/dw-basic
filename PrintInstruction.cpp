@@ -1,8 +1,9 @@
 #include "PrintInstruction.h"
 #include "InstructionMatcher.h"
-#include "Parser.h"
+#include "Parsable.h"
 #include "Expression.h"
 #include "Output.h"
+#include "ExpressionParser.h"
 
 const std::string PrintInstruction::INSTRUCTION_NAME = "print";
 
@@ -24,13 +25,13 @@ bool PrintInstruction::canHandle(std::string instructionCode)
 
 void PrintInstruction::run () 
 {
-    Parser parser(instructionCode);
+    Parsable parser(instructionCode);
 
     parser.skipName(PrintInstruction::INSTRUCTION_NAME);
     parser.skipWhitespace();
-    Expression * expression = parser.pickExpression();
-    output(expression->toString());
-    delete expression;
+    
+    ExpressionParser expressionParser;
+    output(expressionParser.parse(parser.pickRest()));
 }
 
 bool PrintInstruction::terminationRequested()

@@ -2,7 +2,7 @@
 #include "InsertCodeCommand.h"
 #include "Output.h"
 #include "Line.cpp"
-#include "Parser.h"
+#include "Parsable.h"
 #include "ParseHelper.h"
 
 using namespace std;
@@ -49,7 +49,7 @@ bool InsertCodeCommand::isDigit(char character)
 
 Line InsertCodeCommand::parse(string request)
 {
-    Parser parser(request);
+    Parsable parser(request);
 
     long number = parser.pickLineNumber();
     parser.skipWhitespace();

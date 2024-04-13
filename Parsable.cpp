@@ -1,42 +1,47 @@
 #include <string>
-#include "Parser.h"
+#include "Parsable.h"
 #include "ParseHelper.h"
 
-Parser::Parser(std::string code)
+Parsable::Parsable(std::string code)
 {
     this->code = code;
     codeIterator = this->code.begin();
     end = this->code.end();
 }
 
-long Parser::pickLineNumber()
+long Parsable::pickLineNumber()
 {
-    std::string lineNumber;
-    while (ParseHelper::isDigit(peek()) && !isLast()) {
-        lineNumber.push_back(consume());
-    }
-    
-    return std::stol(lineNumber);
+    return pickInteger();
 }
 
-void Parser::skipWhitespace()
+long Parsable::pickInteger()
+{
+    std::string valueString;
+    while (ParseHelper::isDigit(peek()) && !isLast()) {
+        valueString.push_back(consume());
+    }
+    
+    return std::stol(valueString);
+}
+
+void Parsable::skipWhitespace()
 {
     while (isspace(peek()) && !isLast()) {
         codeIterator++;
     }
 }
 
-std::string Parser::pickRest()
+std::string Parsable::pickRest()
 {
     return std::string(codeIterator, end);
 }
 
-void Parser::skipName(std::string name)
+void Parsable::skipName(std::string name)
 {
     codeIterator += name.length();
 }
 
-Expression * Parser::pickExpression()
+Expression * Parsable::pickExpression()
 {
     if ('"' == peek()) {
         return pickStringLiteralExpression();
@@ -49,7 +54,7 @@ Expression * Parser::pickExpression()
     return {};
 }
 
-StringLiteralExpression * Parser::pickStringLiteralExpression()
+StringLiteralExpression * Parsable::pickStringLiteralExpression()
 {
     std::string value = "";
 
@@ -66,7 +71,7 @@ StringLiteralExpression * Parser::pickStringLiteralExpression()
     return new StringLiteralExpression(value);
 }
 
-IntegerLiteralExpression * Parser::pickIntegerLiteralExpression()
+IntegerLiteralExpression * Parsable::pickIntegerLiteralExpression()
 {
     std::string valueString = "";
 
@@ -79,24 +84,24 @@ IntegerLiteralExpression * Parser::pickIntegerLiteralExpression()
     return new IntegerLiteralExpression(value);
 }
 
-char Parser::consume()
+char Parsable::consume()
 {
     return *codeIterator++;
 }
 
-char Parser::peek(long depth)
+char Parsable::peek(long depth)
 {
     long offset = depth - 1;
 
     return *(codeIterator + offset);
 }
 
-void Parser::skip()
+void Parsable::skip()
 {
     codeIterator++;
 }
 
-bool Parser::isClosingQuote()
+bool Parsable::isClosingQuote()
 {
     if (isLast()) {
         return false;
@@ -113,7 +118,7 @@ bool Parser::isClosingQuote()
     return true;
 }
 
-bool Parser::isEscapedQuote()
+bool Parsable::isEscapedQuote()
 {
     if (isLast() || isLast(2)) {
         return false;
@@ -126,7 +131,7 @@ bool Parser::isEscapedQuote()
     return false;
 }
 
-bool Parser::isDigit()
+bool Parsable::isDigit()
 {
     if (isLast()) {
         return false;
@@ -139,7 +144,7 @@ bool Parser::isDigit()
     return false;
 }
 
-bool Parser::isLast(long depth)
+bool Parsable::isLast(long depth)
 {
     long offset = depth - 1;
 
