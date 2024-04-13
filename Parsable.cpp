@@ -24,6 +24,23 @@ long Parsable::pickInteger()
     return std::stol(valueString);
 }
 
+std::string Parsable::pickString()
+{
+    std::string value = "";
+
+    skip();
+
+    while (!isClosingQuote() && !isLast()) {
+        if (isEscapedQuote()) {
+            skip();
+        }
+
+        value.push_back(consume());
+    }
+
+    return value;
+}
+
 void Parsable::skipWhitespace()
 {
     while (isspace(peek()) && !isLast()) {
@@ -56,17 +73,7 @@ Expression * Parsable::pickExpression()
 
 StringLiteralExpression * Parsable::pickStringLiteralExpression()
 {
-    std::string value = "";
-
-    skip();
-
-    while (!isClosingQuote() && !isLast()) {
-        if (isEscapedQuote()) {
-            skip();
-        }
-
-        value.push_back(consume());
-    }
+    std::string value(pickString());
 
     return new StringLiteralExpression(value);
 }

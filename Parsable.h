@@ -11,6 +11,7 @@ class Parsable
         Parsable(std::string code);
         long pickLineNumber();
         long pickInteger();
+        std::string pickString();
         void skipWhitespace();
         void skipName(std::string name);
         Expression *pickExpression();
