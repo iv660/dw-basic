@@ -8,3 +8,4 @@
 #include "LiteralLevelParser.cpp"
 #include "IntegerLiteralParser.cpp"
 #include "StringLiteralParser.cpp"
+#include "ConcatLevelParser.cpp"
